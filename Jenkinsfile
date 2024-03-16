@@ -54,7 +54,8 @@ pipeline {
             steps {
                 
                 // Deploy to Docker Swarm 
-                sh 'docker stack deploy -c docker-compose.yml your_stack_name'
+                sh'sed -i 's/your-image-name/GO/GO-app:$BUILD_NUMBER/g' docker-compose.yml'
+                sh 'docker stack deploy -c docker-compose.yml go'
             }
         }
     }

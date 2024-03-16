@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git SCM
-                git branch: 'NODE', url: 'https://github.com/surya9839/go-node-wordpress/NODE' // Example
+                git branch: 'NODE', url: 'https://github.com/surya9839/go-node-wordpress.git' // Example
             }
         }
 

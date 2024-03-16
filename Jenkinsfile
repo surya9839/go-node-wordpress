@@ -9,20 +9,24 @@ pipeline {
             }
         }
 
-
+    stage('Linting and Formatting') {
+            steps {
+                // Install ESLint and Prettier
+                sh 'npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser'
+                
+                // Run ESLint and Prettier
+                sh 'npx eslint . --ext .js,.jsx,.ts,.tsx --fix'
+                sh 'npx prettier --write .'
+            }
+        }
         
         stage('Testing') {
             steps {
+                // Run your tests
                 sh 'npm test'
             }
         }
         
-        stage('PHPCS Check') {
-            steps {
-                sh 'composer install' 
-                sh 'phpcs --standard=WordPress ./' // Run PHPCS with WordPress standards
-            }
-        }
 
         stage('Build Docker Image') {
             steps {

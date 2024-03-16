@@ -19,7 +19,7 @@ pipeline {
         
         stage('PHPCS Check') {
             steps {
-                sh 'composer install' // Install PHPCS if using Composer
+                sh 'composer install' 
                 sh 'phpcs --standard=WordPress ./' // Run PHPCS with WordPress standards
             }
         }
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 
                 // Deploy to Docker Swarm 
-                sh 'sed -i 's/your-image/node/node-app:$BUILD_NUMBER/g' docker-compose.yml'
+                sh 'sed -i 's/your_nextjs_image:latest/node/node-app:$BUILD_NUMBER/g' docker-compose.yml'
                 sh 'docker stack deploy -c docker-compose.yml node'
             }
         }
